@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..</DockerfileContext>
+    <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Evolve" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.7.12" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Npgsql" Version="4.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Gateway.Common\Gateway.Common.csproj" />
+    <ProjectReference Include="..\Gateway.Contracts.Public\Gateway.Contracts.Public.csproj" />
+    <ProjectReference Include="..\Gateway.Contracts\Gateway.Contracts.csproj" />
+    <ProjectReference Include="..\Gateway.Core\Gateway.Core.csproj" />
+    <ProjectReference Include="..\Gateway.Data.Contracts\Gateway.Data.Contracts.csproj" />
+    <ProjectReference Include="..\Gateway.Data.Dapper\Gateway.Data.Dapper.csproj" />
+    <ProjectReference Include="..\Gateway.Data.Migrations\Gateway.Data.Migrations.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Validators\" />
+  </ItemGroup>
+
+</Project>

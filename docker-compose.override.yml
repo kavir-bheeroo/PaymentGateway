@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  gatewaydb:
+    ports:
+      - "5432:5432"
+
+  gateway.host:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
