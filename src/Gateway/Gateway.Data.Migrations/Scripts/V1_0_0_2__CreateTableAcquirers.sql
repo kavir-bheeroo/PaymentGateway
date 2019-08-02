@@ -1,0 +1,8 @@
+﻿CREATE TABLE IF NOT EXISTS acquirers
+(
+	id BIGSERIAL NOT NULL,
+	name VARCHAR(100) NOT NULL,
+	url VARCHAR(MAX) NOT NULL,
+
+	CONSTRAINT acquirers_pk PRIMARY KEY (id)
+);
