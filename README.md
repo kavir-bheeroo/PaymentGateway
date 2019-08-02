@@ -1,6 +1,12 @@
 # PaymentGateway
 A payment gateway
 
+# Technologies used
+- ASP.NET Core 2.2
+- PostgreSQL
+- Dapper
+- Evolve
+
 # To-do
 - Hypermedia link
 - Time request-response

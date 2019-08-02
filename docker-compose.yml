@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  gatewaydb:
+    image: postgres:10-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: gateway
+
+  gateway.host:
+    image: ${DOCKER_REGISTRY-}gatewayhost
+    build:
+      context: .
+      dockerfile: src/Gateway/Gateway.Host/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - Database__GatewayDatabaseConnectionString=Host=gatewaydb;Username=postgres;Password=postgres;Database=gateway
+    ports:
+      - "5000:8080"
+    depends_on:
+      - gatewaydb 
+    restart: on-failure
