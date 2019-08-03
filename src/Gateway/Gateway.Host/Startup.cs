@@ -1,10 +1,14 @@
-﻿using Gateway.Contracts.Interfaces;
+﻿using AutoMapper;
+using Dapper.FluentMap;
+using Gateway.Contracts.Interfaces;
 using Gateway.Core.Services;
 using Gateway.Data.Contracts.Interfaces;
 using Gateway.Data.Dapper;
+using Gateway.Data.Dapper.Mappings;
 using Gateway.Data.Dapper.Repositories;
 using Gateway.Host.Authentication;
 using Gateway.Host.Extensions;
+using Gateway.Host.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -27,12 +31,22 @@ namespace Gateway.Host
         {
             services.MigrateDatabase(Configuration["Database:GatewayDatabaseConnectionString"]);
 
+            FluentMapper.Initialize(config => {
+                config.AddMap(new MerchantEntityMap());
+                config.AddMap(new MerchantAcquirerEntityMap());
+            });
+
             services.Configure<DatabaseOptions>(Configuration.GetSection(DatabaseOptions.DefaultSectionName));
             services.AddScoped<IMerchantRepository, MerchantRepository>();
+            services.AddScoped<IMerchantAcquirerRepository, MerchantAcquirerRepository>();
+
             services.AddScoped<IMerchantService, MerchantService>();
+            services.AddScoped<IPaymentService, PaymentService>();
 
             services.AddAuthentication(SecretKeyAuthenticationDefaults.AuthenticationScheme)
-                .AddSecretKey(); 
+                .AddSecretKey();
+
+            services.AddAutoMapper(typeof(MappingProfile));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

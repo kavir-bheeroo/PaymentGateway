@@ -5,10 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Gateway.Common\Gateway.Common.csproj" />
     <ProjectReference Include="..\Gateway.Acquiring.Contracts\Gateway.Acquiring.Contracts.csproj" />
-    <ProjectReference Include="..\Gateway.Contracts\Gateway.Contracts.csproj" />
-    <ProjectReference Include="..\Gateway.Data.Contracts\Gateway.Data.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,4 +10,11 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Scripts\V1_0_0_2__CreateTableAcquirers.sql" />
+    <None Remove="Scripts\V1_0_0_3__CreateTableMerchantAcquirers.sql" />
+    <None Remove="Scripts\V1_0_0_5__SeedTableAcquirers.sql" />
+    <None Remove="Scripts\V1_0_0_6__SeedTableMerchantAcquirers.sql" />
+  </ItemGroup>
+
 </Project>

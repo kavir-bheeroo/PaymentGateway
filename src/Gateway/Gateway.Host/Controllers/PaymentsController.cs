@@ -1,6 +1,7 @@
-﻿using Gateway.Common;
-using Gateway.Common.Extensions;
+﻿using AutoMapper;
+using Gateway.Common;
 using Gateway.Contracts.Interfaces;
+using Gateway.Contracts.Models;
 using Gateway.Contracts.Public.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,24 +14,25 @@ namespace Gateway.Host.Controllers
     [Authorize]
     public class PaymentsController : ControllerBase
     {
-        private readonly IMerchantService _merchantService;
+        private readonly IPaymentService _paymentService;
+        private readonly IMapper _mapper;
 
-        public PaymentsController(IMerchantService merchantService)
+        public PaymentsController(IPaymentService paymentService, IMapper mapper)
         {
-            _merchantService = Guard.IsNotNull(merchantService, nameof(merchantService));
+            _mapper = Guard.IsNotNull(mapper, nameof(mapper));
+            _paymentService = Guard.IsNotNull(paymentService, nameof(paymentService));
         }
 
         [HttpPost]
         public async Task<ActionResult<PaymentResponse>> Post(PaymentRequest request)
         {
-            var merchantId = User.GetMerchantId();
-            var merchantName = User.GetMerchantName();
-            //var merchant = 
-            //var model = _mapper.Map<CheckMrzStatusRequestModel>(request);
-            //var result = await _kycService.CheckMrzTaskStatusAsync(model);
+            var paymentRequestModel = _mapper.Map<PaymentRequestModel>(request);
+            var merchantModel = _mapper.Map<MerchantModel>(User);
+
+            var result = await _paymentService.ProcessPaymentAsync(paymentRequestModel, merchantModel);
             //var response = _mapper.Map<CheckMrzStatusResponse>(result);
 
-            return Ok(merchantName);
+            return Ok(merchantModel.Name);
         }
     }
 }
