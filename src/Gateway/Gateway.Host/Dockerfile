@@ -12,6 +12,8 @@ COPY ["src/Gateway/Gateway.Contracts.Public/Gateway.Contracts.Public.csproj", "s
 COPY ["src/Gateway/Gateway.Contracts/Gateway.Contracts.csproj", "src/Gateway/Gateway.Contracts/"]
 COPY ["src/Gateway/Gateway.Data.Migrations/Gateway.Data.Migrations.csproj", "src/Gateway/Gateway.Data.Migrations/"]
 COPY ["src/Gateway/Gateway.Core/Gateway.Core.csproj", "src/Gateway/Gateway.Core/"]
+COPY ["src/Gateway/Gateway.Acquiring.Contracts/Gateway.Acquiring.Contracts.csproj", "src/Gateway/Gateway.Acquiring.Contracts/"]
+COPY ["src/Gateway/Gateway.Acquiring.BankSimulator/Gateway.Acquiring.BankSimulator.csproj", "src/Gateway/Gateway.Acquiring.BankSimulator/"]
 RUN dotnet restore "src/Gateway/Gateway.Host/Gateway.Host.csproj"
 COPY . .
 WORKDIR "/src/src/Gateway/Gateway.Host"

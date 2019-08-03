@@ -1,10 +1,12 @@
-﻿using Gateway.Contracts.Interfaces;
-using Gateway.Core.Services;
-using Gateway.Data.Contracts.Interfaces;
+﻿using Autofac;
+using AutoMapper;
+using Dapper.FluentMap;
+using Gateway.Core;
 using Gateway.Data.Dapper;
-using Gateway.Data.Dapper.Repositories;
+using Gateway.Data.Dapper.Mappings;
 using Gateway.Host.Authentication;
 using Gateway.Host.Extensions;
+using Gateway.Host.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -27,14 +29,25 @@ namespace Gateway.Host
         {
             services.MigrateDatabase(Configuration["Database:GatewayDatabaseConnectionString"]);
 
+            FluentMapper.Initialize(config => {
+                config.AddMap(new MerchantEntityMap());
+                config.AddMap(new MerchantAcquirerEntityMap());
+            });
+
             services.Configure<DatabaseOptions>(Configuration.GetSection(DatabaseOptions.DefaultSectionName));
-            services.AddScoped<IMerchantRepository, MerchantRepository>();
-            services.AddScoped<IMerchantService, MerchantService>();
 
             services.AddAuthentication(SecretKeyAuthenticationDefaults.AuthenticationScheme)
-                .AddSecretKey(); 
+                .AddSecretKey();
+
+            services.AddAutoMapper(typeof(MappingProfile), typeof(Core.Mappers.MappingProfile));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new ServicesModule());
+            builder.RegisterModule(new RepositoriesModule());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

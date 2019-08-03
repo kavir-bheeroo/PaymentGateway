@@ -5,5 +5,5 @@
 	secret_key VARCHAR(36) NOT NULL,
 
 	CONSTRAINT merchants_pk PRIMARY KEY (id),
-	CONSTRAINT players_secret_key_uq UNIQUE (secret_key)
+	CONSTRAINT merchants_secret_key_uq UNIQUE (secret_key)
 );
