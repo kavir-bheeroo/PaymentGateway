@@ -30,9 +30,9 @@ namespace Gateway.Host.Controllers
             var merchantModel = _mapper.Map<MerchantModel>(User);
 
             var result = await _paymentService.ProcessPaymentAsync(paymentRequestModel, merchantModel);
-            //var response = _mapper.Map<CheckMrzStatusResponse>(result);
+            var response = _mapper.Map<PaymentResponse>(result);
 
-            return Ok(merchantModel.Name);
+            return Ok(response);
         }
     }
 }

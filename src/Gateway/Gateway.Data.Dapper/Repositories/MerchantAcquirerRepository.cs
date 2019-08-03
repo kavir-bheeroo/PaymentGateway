@@ -23,11 +23,11 @@ namespace Gateway.Data.Dapper.Repositories
                 SELECT	ma.id,
                         ma.merchant_id,
                         ma.acquirer_id,
-                        m.name,
+                        m.name merchant_name,
                         m.secret_key,
-                        a.name,
+                        a.name acquirer_name,
                         a.url
-                FROM	merchant_acquirers
+                FROM	merchant_acquirers ma
                 INNER JOIN merchants m ON m.id = ma.merchant_id
                 INNER JOIN acquirers a ON a.id = ma.acquirer_id
                 WHERE	ma.merchant_id = @merchantId

@@ -1,11 +1,9 @@
-﻿using AutoMapper;
+﻿using Autofac;
+using AutoMapper;
 using Dapper.FluentMap;
-using Gateway.Contracts.Interfaces;
-using Gateway.Core.Services;
-using Gateway.Data.Contracts.Interfaces;
+using Gateway.Core;
 using Gateway.Data.Dapper;
 using Gateway.Data.Dapper.Mappings;
-using Gateway.Data.Dapper.Repositories;
 using Gateway.Host.Authentication;
 using Gateway.Host.Extensions;
 using Gateway.Host.Mappers;
@@ -37,18 +35,19 @@ namespace Gateway.Host
             });
 
             services.Configure<DatabaseOptions>(Configuration.GetSection(DatabaseOptions.DefaultSectionName));
-            services.AddScoped<IMerchantRepository, MerchantRepository>();
-            services.AddScoped<IMerchantAcquirerRepository, MerchantAcquirerRepository>();
-
-            services.AddScoped<IMerchantService, MerchantService>();
-            services.AddScoped<IPaymentService, PaymentService>();
 
             services.AddAuthentication(SecretKeyAuthenticationDefaults.AuthenticationScheme)
                 .AddSecretKey();
 
-            services.AddAutoMapper(typeof(MappingProfile));
+            services.AddAutoMapper(typeof(MappingProfile), typeof(Core.Mappers.MappingProfile));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new ServicesModule());
+            builder.RegisterModule(new RepositoriesModule());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

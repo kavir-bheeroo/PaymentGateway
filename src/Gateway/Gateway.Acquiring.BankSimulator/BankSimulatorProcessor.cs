@@ -9,7 +9,7 @@ namespace Gateway.Acquiring.BankSimulator
     {
         public Task<ProcessorResponse> ProcessPaymentAsync(ProcessorRequest request)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(new ProcessorResponse { AcquirerPaymentId = Guid.NewGuid().ToString(), PaymentId = request.PaymentId });
         }
     }
 }

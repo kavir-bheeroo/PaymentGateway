@@ -10,7 +10,9 @@ namespace Gateway.Host.Mappers
     {
         public MappingProfile()
         {
+            CreateMap<Card, CardModel>().ReverseMap();
             CreateMap<PaymentRequest, PaymentRequestModel>();
+            CreateMap<PaymentResponseModel, PaymentResponse>();
             CreateMap<ClaimsPrincipal, MerchantModel>()
                 .ForMember(d => d.Id, o => o.MapFrom(s => s.GetMerchantId()))
                 .ForMember(d => d.Name, o => o.MapFrom(s => s.GetMerchantName()))
