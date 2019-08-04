@@ -10,5 +10,7 @@
         public int ExpiryMonth { get; set; }
         public int ExpiryYear { get; set; }
         public string Name { get; set; }
+        public string AcquirerStatus { get; set; }
+        public string AcquirerResponseCode { get; set; }
     }
 }

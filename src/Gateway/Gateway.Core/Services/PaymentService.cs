@@ -35,19 +35,21 @@ namespace Gateway.Core.Services
 
             if (merchantAcquirer == null)
             {
-                throw new ArgumentException($"No acquirer setup for merchant { merchant.Name }");
+                throw new ArgumentException($"No acquirer setup for merchant '{ merchant.Name }'.");
             }
 
             var enumAsString = (ProcessorList) Enum.Parse(typeof(ProcessorList), merchantAcquirer.AcquirerName);
             _processor = _processors[enumAsString];
 
-            // Generate new payment id
-            var paymentId = Guid.NewGuid().ToString();
+            // Create processor request
+            var processorRequest = new ProcessorRequest
+            {
+                PaymentId = Guid.NewGuid().ToString(),
+                PaymentDetails = _mapper.Map<PaymentDetails>(request),
+                AcquirerDetails = _mapper.Map<AcquirerDetails>(merchantAcquirer)
+            };
 
-            var processingRequest = _mapper.Map<ProcessorRequest>(request);
-            processingRequest.PaymentId = paymentId;
-
-            var processingResponse = await _processor.ProcessPaymentAsync(processingRequest);
+            var processingResponse = await _processor.ProcessPaymentAsync(processorRequest);
             var response = _mapper.Map<PaymentResponseModel>(processingResponse);
 
             return response;
