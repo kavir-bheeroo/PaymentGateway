@@ -19,6 +19,8 @@ namespace Gateway.Data.Dapper.Repositories
 
         public async Task<MerchantAcquirerEntity> GetMerchantAcquirerByMerchantIdAsync(int merchantId)
         {
+            Guard.IsNotNull(merchantId, nameof(merchantId));
+
             const string query = @"
                 SELECT	ma.id,
                         ma.merchant_id,

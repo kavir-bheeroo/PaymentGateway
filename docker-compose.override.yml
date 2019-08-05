@@ -8,3 +8,7 @@ services:
   gateway.host:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+
+  banksimulator:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development

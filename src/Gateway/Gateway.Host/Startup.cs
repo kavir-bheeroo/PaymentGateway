@@ -32,6 +32,7 @@ namespace Gateway.Host
             FluentMapper.Initialize(config => {
                 config.AddMap(new MerchantEntityMap());
                 config.AddMap(new MerchantAcquirerEntityMap());
+                config.AddMap(new AcquirerResponseCodeMappingEntityMap());
             });
 
             services.Configure<DatabaseOptions>(Configuration.GetSection(DatabaseOptions.DefaultSectionName));
@@ -39,7 +40,12 @@ namespace Gateway.Host
             services.AddAuthentication(SecretKeyAuthenticationDefaults.AuthenticationScheme)
                 .AddSecretKey();
 
-            services.AddAutoMapper(typeof(MappingProfile), typeof(Core.Mappers.MappingProfile));
+            services.AddAutoMapper(
+                typeof(MappingProfile),
+                typeof(Core.Mappers.MappingProfile),
+                typeof(Acquiring.BankSimulator.Mappers.MappingProfile));
+
+            services.AddHttpClient();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

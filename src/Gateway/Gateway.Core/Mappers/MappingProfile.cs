@@ -23,10 +23,12 @@ namespace Gateway.Core.Mappers
                 .ForMember(d => d.Url, o => o.MapFrom(s => s.Url));
 
             CreateMap<ProcessorResponse, PaymentResponseModel>()
-                .ForPath(d => d.Card.Name, o => o.MapFrom(s => s.Name))
-                .ForPath(d => d.Card.ExpiryMonth, o => o.MapFrom(s => s.ExpiryMonth))
-                .ForPath(d => d.Card.ExpiryYear, o => o.MapFrom(s => s.ExpiryYear))
-                .ForPath(d => d.Card.Number, o => o.MapFrom(s => s.Number));
+                .ForMember(d => d.Amount, o => o.MapFrom(s => s.PaymentDetails.Amount))
+                .ForMember(d => d.Currency, o => o.MapFrom(s => s.PaymentDetails.Currency))
+                .ForPath(d => d.Card.Name, o => o.MapFrom(s => s.PaymentDetails.Name))
+                .ForPath(d => d.Card.ExpiryMonth, o => o.MapFrom(s => s.PaymentDetails.ExpiryMonth))
+                .ForPath(d => d.Card.ExpiryYear, o => o.MapFrom(s => s.PaymentDetails.ExpiryYear))
+                .ForPath(d => d.Card.Number, o => o.MapFrom(s => s.PaymentDetails.Number));
         }
     }
 }

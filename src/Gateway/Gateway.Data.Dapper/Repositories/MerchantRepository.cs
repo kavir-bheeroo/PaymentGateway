@@ -19,6 +19,8 @@ namespace Gateway.Data.Dapper.Repositories
 
         public async Task<MerchantEntity> GetMerchantBySecretKeyAsync(string secretKey)
         {
+            Guard.IsNotNull(secretKey, nameof(secretKey));
+
             const string query = @"
                 SELECT	id,
                         name,
