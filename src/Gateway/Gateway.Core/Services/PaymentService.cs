@@ -42,11 +42,19 @@ namespace Gateway.Core.Services
         {
             Guard.IsNotNull(paymentId, nameof(paymentId));
 
-            // Validate id
-
-            // Check if merchant has access to specific payment.
-
             var payment = await _paymentRepository.GetByIdAsync(paymentId);
+
+            // This should normally return a 404 Not Found exception as well for security purposes. Unauthorized used just for testing purposes.
+            if (payment.MerchantId != merchant.Id)
+            {
+                throw new UnauthorizedException($"Merchant is not authorised to retrieve this payment.");
+            }
+
+            if (payment == null)
+            {
+                throw new ObjectNotFoundException($"No payment with id '{ paymentId } was found.'");
+            }
+
             var response = _mapper.Map<PaymentResponseModel>(payment);
 
             return response;
