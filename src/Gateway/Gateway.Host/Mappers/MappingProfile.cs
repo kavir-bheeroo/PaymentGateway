@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
+using Gateway.Common.Extensions;
 using Gateway.Contracts.Models;
 using Gateway.Contracts.Public.Models;
 using System.Security.Claims;
-using Gateway.Common.Extensions;
-using Gateway.Common;
 
 namespace Gateway.Host.Mappers
 {
@@ -16,8 +15,7 @@ namespace Gateway.Host.Mappers
 
             CreateMap<PaymentRequest, PaymentRequestModel>();
 
-            CreateMap<PaymentResponseModel, PaymentResponse>()
-                .ForMember(d => d.Status, o => o.MapFrom(s => s.ResponseCode.Equals(Constants.SuccessfulResponseCode) ? "Payment Successful" : "Payment Failed"));
+            CreateMap<PaymentResponseModel, PaymentResponse>();
 
             CreateMap<ClaimsPrincipal, MerchantModel>()
                 .ForMember(d => d.Id, o => o.MapFrom(s => s.GetMerchantId()))

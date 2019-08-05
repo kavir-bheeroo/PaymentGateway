@@ -5,6 +5,6 @@ namespace Gateway.Data.Contracts.Interfaces
 {
     public interface IMerchantRepository
     {
-        Task<MerchantEntity> GetMerchantBySecretKeyAsync(string secretKey);
+        Task<MerchantEntity> GetBySecretKeyAsync(string secretKey);
     }
 }

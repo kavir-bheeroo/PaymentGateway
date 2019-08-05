@@ -14,9 +14,10 @@
     <None Remove="Scripts\V1_0_0_2__CreateTableAcquirers.sql" />
     <None Remove="Scripts\V1_0_0_3__CreateTableMerchantAcquirers.sql" />
     <None Remove="Scripts\V1_0_0_4__CreateTableAcquirerResponseCodeMappings.sql" />
-    <None Remove="Scripts\V1_0_0_6__SeedTableAcquirers.sql" />
-    <None Remove="Scripts\V1_0_0_7__SeedTableMerchantAcquirers.sql" />
+    <None Remove="Scripts\V1_0_0_5__CreateTablePayments.sql" />
+    <None Remove="Scripts\V1_0_0_7__SeedTableAcquirers.sql" />
     <None Remove="Scripts\V1_0_0_8__SeedTableAcquirerResponseCodeMappings.sql" />
+    <None Remove="Scripts\V1_0_0_9__SeedTableMerchantAcquirers.sql" />
   </ItemGroup>
 
 </Project>

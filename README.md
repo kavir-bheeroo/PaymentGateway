@@ -20,6 +20,7 @@
 - Benchmarking and performance tuning
 - Document about separation of processors
 - FluentValidation
+- Swagger
 
 # Assumptions
 - For the sake of this test, the routing process has been kept very straight-forward. Card scheme and currency are not taken into consideration when routing and all requests are sent to the simulator.  

@@ -17,7 +17,7 @@ namespace Gateway.Data.Dapper.Repositories
             _databaseOptions = Guard.IsNotNull(databaseOptions, nameof(databaseOptions)).Value;
         }
 
-        public async Task<AcquirerResponseCodeMapping> GetMappingByAcquirerResponseCodeAsync(string acquirerResponseCode)
+        public async Task<AcquirerResponseCodeMapping> GetByAcquirerResponseCodeAsync(string acquirerResponseCode)
         {
             Guard.IsNotNull(acquirerResponseCode, nameof(acquirerResponseCode));
 
