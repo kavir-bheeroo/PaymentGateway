@@ -17,7 +17,7 @@ namespace Gateway.Data.Dapper.Repositories
             _databaseOptions = Guard.IsNotNull(databaseOptions, nameof(databaseOptions)).Value;
         }
 
-        public async Task<MerchantEntity> GetMerchantBySecretKeyAsync(string secretKey)
+        public async Task<MerchantEntity> GetBySecretKeyAsync(string secretKey)
         {
             Guard.IsNotNull(secretKey, nameof(secretKey));
 

@@ -19,7 +19,7 @@ namespace Gateway.Core.Services
         {
             Guard.IsNotNull(secretKey, nameof(secretKey));
 
-            var entity = await _repository.GetMerchantBySecretKeyAsync(secretKey);
+            var entity = await _repository.GetBySecretKeyAsync(secretKey);
 
             return new MerchantModel { Id = entity.Id, Name = entity.Name, SecretKey = entity.SecretKey };
         }

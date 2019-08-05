@@ -33,6 +33,7 @@ namespace Gateway.Host
                 config.AddMap(new MerchantEntityMap());
                 config.AddMap(new MerchantAcquirerEntityMap());
                 config.AddMap(new AcquirerResponseCodeMappingEntityMap());
+                config.AddMap(new PaymentEntityMap());
             });
 
             services.Configure<DatabaseOptions>(Configuration.GetSection(DatabaseOptions.DefaultSectionName));

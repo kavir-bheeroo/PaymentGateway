@@ -22,6 +22,11 @@ namespace Gateway.Data.Dapper
                 .RegisterType<AcquirerResponseCodeMappingRepository>()
                 .As<IAcquirerResponseCodeMappingRepository>()
                 .InstancePerLifetimeScope();
+
+            builder
+                .RegisterType<PaymentRepository>()
+                .As<IPaymentRepository>()
+                .InstancePerLifetimeScope();
         }
     }
 }

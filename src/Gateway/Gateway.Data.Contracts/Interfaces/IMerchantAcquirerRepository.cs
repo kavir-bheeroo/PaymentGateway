@@ -5,6 +5,6 @@ namespace Gateway.Data.Contracts.Interfaces
 {
     public interface IMerchantAcquirerRepository
     {
-        Task<MerchantAcquirerEntity> GetMerchantAcquirerByMerchantIdAsync(int merchantId);
+        Task<MerchantAcquirerEntity> GetByMerchantIdAsync(int merchantId);
     }
 }

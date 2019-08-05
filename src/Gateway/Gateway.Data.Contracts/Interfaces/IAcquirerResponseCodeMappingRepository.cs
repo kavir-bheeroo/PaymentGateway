@@ -5,6 +5,6 @@ namespace Gateway.Data.Contracts.Interfaces
 {
     public interface IAcquirerResponseCodeMappingRepository
     {
-        Task<AcquirerResponseCodeMapping> GetMappingByAcquirerResponseCodeAsync(string acquirerResponseCode);
+        Task<AcquirerResponseCodeMapping> GetByAcquirerResponseCodeAsync(string acquirerResponseCode);
     }
 }

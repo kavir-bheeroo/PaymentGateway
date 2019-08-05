@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Gateway.Acquiring.Contracts.Models;
+using Gateway.Common;
 using Gateway.Contracts.Models;
 using Gateway.Data.Contracts.Entities;
 
@@ -29,6 +30,15 @@ namespace Gateway.Core.Mappers
                 .ForPath(d => d.Card.ExpiryMonth, o => o.MapFrom(s => s.PaymentDetails.ExpiryMonth))
                 .ForPath(d => d.Card.ExpiryYear, o => o.MapFrom(s => s.PaymentDetails.ExpiryYear))
                 .ForPath(d => d.Card.Number, o => o.MapFrom(s => s.PaymentDetails.Number));
+
+            CreateMap<PaymentResponseModel, PaymentEntity>()
+                .ForMember(d => d.Status, o => o.MapFrom(s => s.ResponseCode.Equals(Constants.SuccessResponseCode) ? Constants.SuccessStatus : Constants.FailStatus));
+
+            CreateMap<PaymentEntity, PaymentResponseModel>()
+                .ForPath(d => d.Card.Name, o => o.MapFrom(s => s.CardholderName))
+                .ForPath(d => d.Card.ExpiryMonth, o => o.MapFrom(s => s.ExpiryMonth))
+                .ForPath(d => d.Card.ExpiryYear, o => o.MapFrom(s => s.ExpiryYear))
+                .ForPath(d => d.Card.Number, o => o.MapFrom(s => s.CardNumber));
         }
     }
 }

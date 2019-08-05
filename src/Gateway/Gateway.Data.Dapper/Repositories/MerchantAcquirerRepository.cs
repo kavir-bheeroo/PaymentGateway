@@ -17,7 +17,7 @@ namespace Gateway.Data.Dapper.Repositories
             _databaseOptions = Guard.IsNotNull(databaseOptions, nameof(databaseOptions)).Value;
         }
 
-        public async Task<MerchantAcquirerEntity> GetMerchantAcquirerByMerchantIdAsync(int merchantId)
+        public async Task<MerchantAcquirerEntity> GetByMerchantIdAsync(int merchantId)
         {
             Guard.IsNotNull(merchantId, nameof(merchantId));
 
