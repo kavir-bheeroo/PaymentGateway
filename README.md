@@ -2,6 +2,7 @@
 - A payment gateway
 - Authentication using secret key done by setting a custom authentication scheme - https://joonasw.net/view/creating-auth-scheme-in-aspnet-core-2
 - Autofac Keyed Services used to select appropriate processor. 
+- BankSimulator API mocks an acquirer and sends a successful or failed response based on the amount being passed.
 
 # Technologies used
 - ASP.NET Core 2.2
