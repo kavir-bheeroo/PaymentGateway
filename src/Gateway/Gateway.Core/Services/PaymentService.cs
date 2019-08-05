@@ -38,7 +38,21 @@ namespace Gateway.Core.Services
             _mapper = Guard.IsNotNull(mapper, nameof(mapper));
         }
 
-        public async Task<PaymentResponseModel> ProcessPaymentAsync(PaymentRequestModel request, MerchantModel merchant)
+        public async Task<PaymentResponseModel> GetByIdAsync(Guid paymentId, MerchantModel merchant)
+        {
+            Guard.IsNotNull(paymentId, nameof(paymentId));
+
+            // Validate id
+
+            // Check if merchant has access to specific payment.
+
+            var payment = await _paymentRepository.GetByIdAsync(paymentId);
+            var response = _mapper.Map<PaymentResponseModel>(payment);
+
+            return response;
+        }
+
+        public async Task<PaymentResponseModel> ProcessAsync(PaymentRequestModel request, MerchantModel merchant)
         {
             Guard.IsNotNull(request, nameof(request));
             Guard.IsNotNull(merchant, nameof(merchant));
@@ -65,11 +79,12 @@ namespace Gateway.Core.Services
                 AcquirerDetails = _mapper.Map<AcquirerDetails>(merchantAcquirer)
             };
 
-            var processingResponse = await _processor.ProcessPaymentAsync(processorRequest);
-            var responseCodeMapping = await _acquirerResponseCodeMappingRepository.GetByAcquirerResponseCodeAsync(processingResponse.AcquirerResponseCode);
+            var processorResponse = await _processor.ProcessPaymentAsync(processorRequest);
+            var responseCodeMapping = await _acquirerResponseCodeMappingRepository.GetByAcquirerResponseCodeAsync(processorResponse.AcquirerResponseCode);
 
-            var response = _mapper.Map<PaymentResponseModel>(processingResponse);
-            response.ResponseCode = responseCodeMapping?.GatewayResponseCode ?? Constants.FailedResponseCode;
+            var response = _mapper.Map<PaymentResponseModel>(processorResponse);
+            response.ResponseCode = responseCodeMapping?.GatewayResponseCode ?? Constants.FailResponseCode;
+            response.Status = response.ResponseCode.Equals(Constants.SuccessResponseCode) ? Constants.SuccessStatus : Constants.FailStatus;
 
             // Map response details to the payment and update data store
             _mapper.Map(response, payment);
@@ -82,7 +97,7 @@ namespace Gateway.Core.Services
         {
             return new PaymentEntity
             {
-                PaymentId = Guid.NewGuid(),
+                PaymentId = Guid.NewGuid().ToString(),
                 MerchantId = merchantAcquirer.MerchantId,
                 MerchantName = merchantAcquirer.MerchantName,
                 AcquirerId = merchantAcquirer.AcquirerId,
@@ -93,7 +108,7 @@ namespace Gateway.Core.Services
                 CardNumber = request.Card.Number,
                 ExpiryMonth = request.Card.ExpiryMonth,
                 ExpiryYear = request.Card.ExpiryYear,
-                CardholderName = request.Card.Number,
+                CardholderName = request.Card.Name,
                 PaymentTime = DateTime.UtcNow
             };
         }

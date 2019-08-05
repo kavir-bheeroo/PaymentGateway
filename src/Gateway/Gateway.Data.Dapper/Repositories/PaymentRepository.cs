@@ -42,10 +42,10 @@ namespace Gateway.Data.Dapper.Repositories
                         acquirer_response_code,
                         payment_time
                 FROM	payments
-                WHERE	id = @id
+                WHERE	id = @Id
             ";
 
-            var parameters = new { id };
+            var parameters = new { Id = id.ToString() };
 
             using (var connection = new NpgsqlConnection(_databaseOptions.GatewayDatabaseConnectionString))
             {

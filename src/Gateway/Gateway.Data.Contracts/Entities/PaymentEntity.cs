@@ -4,7 +4,7 @@ namespace Gateway.Data.Contracts.Entities
 {
     public class PaymentEntity
     {
-        public Guid PaymentId { get; set; }
+        public string PaymentId { get; set; }
         public int MerchantId { get; set; }
         public string MerchantName { get; set; }
         public int AcquirerId { get; set; }

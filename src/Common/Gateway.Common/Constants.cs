@@ -2,11 +2,11 @@
 {
     public class Constants
     {
-        public const string SuccessfulResponseCode = "10000";
-        public const string FailedResponseCode = "20000";
+        public const string SuccessResponseCode = "10000";
+        public const string FailResponseCode = "20000";
 
-        public const string SuccessfulStatus = "Successful";
+        public const string SuccessStatus = "Succeeded";
         public const string PendingStatus = "Pending";
-        public const string FailedStatus = "Failed";
+        public const string FailStatus = "Failed";
     }
 }
