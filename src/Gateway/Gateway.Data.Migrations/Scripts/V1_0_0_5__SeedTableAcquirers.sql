@@ -1,1 +1,0 @@
-﻿INSERT INTO "acquirers" ("id", "name", "url") VALUES (1, 'BankSimulator', 'http://localhost:5001/api/process');

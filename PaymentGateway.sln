@@ -34,9 +34,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gateway.Core", "src\Gateway
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A91C447E-2870-48C2-8FDA-2B96E322AC7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.Acquiring.Contracts", "src\Gateway\Gateway.Acquiring.Contracts\Gateway.Acquiring.Contracts.csproj", "{5769A986-F552-41F4-81BB-563DB3E35AFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gateway.Acquiring.Contracts", "src\Gateway\Gateway.Acquiring.Contracts\Gateway.Acquiring.Contracts.csproj", "{5769A986-F552-41F4-81BB-563DB3E35AFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.Acquiring.BankSimulator", "src\Gateway\Gateway.Acquiring.BankSimulator\Gateway.Acquiring.BankSimulator.csproj", "{856216DA-985E-4BA8-AFD9-44C3C173B75B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gateway.Acquiring.BankSimulator", "src\Gateway\Gateway.Acquiring.BankSimulator\Gateway.Acquiring.BankSimulator.csproj", "{856216DA-985E-4BA8-AFD9-44C3C173B75B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Simulator", "Simulator", "{972B0A68-9600-40BA-916D-AAE319D076D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankSimulator", "src\Simulator\BankSimulator\BankSimulator.csproj", "{65620B35-1250-435A-826B-B94D0CAA27AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,6 +92,10 @@ Global
 		{856216DA-985E-4BA8-AFD9-44C3C173B75B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{856216DA-985E-4BA8-AFD9-44C3C173B75B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{856216DA-985E-4BA8-AFD9-44C3C173B75B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65620B35-1250-435A-826B-B94D0CAA27AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65620B35-1250-435A-826B-B94D0CAA27AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65620B35-1250-435A-826B-B94D0CAA27AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65620B35-1250-435A-826B-B94D0CAA27AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +113,8 @@ Global
 		{BE440591-A2C3-45B8-8F75-BD5562057C89} = {FD7C5FA4-20D8-4586-B931-96DA5C262EBF}
 		{5769A986-F552-41F4-81BB-563DB3E35AFF} = {FD7C5FA4-20D8-4586-B931-96DA5C262EBF}
 		{856216DA-985E-4BA8-AFD9-44C3C173B75B} = {FD7C5FA4-20D8-4586-B931-96DA5C262EBF}
+		{972B0A68-9600-40BA-916D-AAE319D076D1} = {BE78F864-2BCB-4FA2-BD71-90FF654B51F0}
+		{65620B35-1250-435A-826B-B94D0CAA27AE} = {972B0A68-9600-40BA-916D-AAE319D076D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DAEE3D30-8D54-4E67-AB1E-DD36477343FC}

@@ -1,0 +1,2 @@
+﻿INSERT INTO "acquirer_response_code_mappings" ("id", "acquirer_id", "acquirer_response_code", "gateway_response_code") VALUES (1, 1, '200', '10000');
+INSERT INTO "acquirer_response_code_mappings" ("id", "acquirer_id", "acquirer_response_code", "gateway_response_code") VALUES (2, 1, '400', '20000');

@@ -3,6 +3,7 @@ using Gateway.Contracts.Models;
 using Gateway.Contracts.Public.Models;
 using System.Security.Claims;
 using Gateway.Common.Extensions;
+using Gateway.Common;
 
 namespace Gateway.Host.Mappers
 {
@@ -10,9 +11,14 @@ namespace Gateway.Host.Mappers
     {
         public MappingProfile()
         {
-            CreateMap<Card, CardModel>().ReverseMap();
+            CreateMap<CardRequest, CardRequestModel>();
+            CreateMap<CardResponseModel, CardResponse>();
+
             CreateMap<PaymentRequest, PaymentRequestModel>();
-            CreateMap<PaymentResponseModel, PaymentResponse>();
+
+            CreateMap<PaymentResponseModel, PaymentResponse>()
+                .ForMember(d => d.Status, o => o.MapFrom(s => s.ResponseCode.Equals(Constants.SuccessfulResponseCode) ? "Payment Successful" : "Payment Failed"));
+
             CreateMap<ClaimsPrincipal, MerchantModel>()
                 .ForMember(d => d.Id, o => o.MapFrom(s => s.GetMerchantId()))
                 .ForMember(d => d.Name, o => o.MapFrom(s => s.GetMerchantName()))

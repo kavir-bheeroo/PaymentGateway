@@ -17,6 +17,11 @@ namespace Gateway.Data.Dapper
                 .RegisterType<MerchantAcquirerRepository>()
                 .As<IMerchantAcquirerRepository>()
                 .InstancePerLifetimeScope();
+
+            builder
+                .RegisterType<AcquirerResponseCodeMappingRepository>()
+                .As<IAcquirerResponseCodeMappingRepository>()
+                .InstancePerLifetimeScope();
         }
     }
 }
