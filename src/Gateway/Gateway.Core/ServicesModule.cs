@@ -3,6 +3,7 @@ using Gateway.Acquiring.BankSimulator;
 using Gateway.Acquiring.Contracts;
 using Gateway.Acquiring.Contracts.Interfaces;
 using Gateway.Contracts.Interfaces;
+using Gateway.Core.Security;
 using Gateway.Core.Services;
 
 namespace Gateway.Core
@@ -19,6 +20,11 @@ namespace Gateway.Core
             builder
                 .RegisterType<MerchantService>()
                 .As<IMerchantService>()
+                .InstancePerLifetimeScope();
+
+            builder
+                .RegisterType<AesCryptor>()
+                .As<ICryptor>()
                 .InstancePerLifetimeScope();
 
             builder

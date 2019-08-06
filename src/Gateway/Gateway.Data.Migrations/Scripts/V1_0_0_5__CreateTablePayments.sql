@@ -9,7 +9,7 @@
 	response_code VARCHAR(5),
 	amount INT NOT NULL,
 	currency VARCHAR(5) NOT NULL,
-	card_number VARCHAR(30) NOT NULL,
+	card_number VARCHAR NOT NULL,
 	expiry_month VARCHAR(2) NOT NULL,
 	expiry_year VARCHAR(4) NOT NULL,
 	cardholder_name VARCHAR(100) NOT NULL,

@@ -2,6 +2,7 @@
 using AutoMapper;
 using Dapper.FluentMap;
 using Gateway.Core;
+using Gateway.Core.Security;
 using Gateway.Data.Dapper;
 using Gateway.Data.Dapper.Mappings;
 using Gateway.Host.Authentication;
@@ -37,6 +38,7 @@ namespace Gateway.Host
             });
 
             services.Configure<DatabaseOptions>(Configuration.GetSection(DatabaseOptions.DefaultSectionName));
+            services.Configure<SecurityOptions>(Configuration.GetSection(SecurityOptions.DefaultSectionName));
 
             services.AddAuthentication(SecretKeyAuthenticationDefaults.AuthenticationScheme)
                 .AddSecretKey();

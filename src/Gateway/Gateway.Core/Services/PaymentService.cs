@@ -20,8 +20,8 @@ namespace Gateway.Core.Services
         private readonly IAcquirerResponseCodeMappingRepository _acquirerResponseCodeMappingRepository;
         private readonly IPaymentRepository _paymentRepository;
         private readonly IIndex<ProcessorList, IProcessor> _processors;
+        private readonly ICryptor _cryptor;
         private readonly IMapper _mapper;
-
         private IProcessor _processor;
 
         public PaymentService(
@@ -29,12 +29,14 @@ namespace Gateway.Core.Services
             IAcquirerResponseCodeMappingRepository acquirerResponseCodeMappingRepository,
             IPaymentRepository paymentRepository,
             IIndex<ProcessorList, IProcessor> processors,
+            ICryptor cryptor,
             IMapper mapper)
         {
             _merchantAcquirerRepository = Guard.IsNotNull(merchantAcquirerRepository, nameof(merchantAcquirerRepository));
             _acquirerResponseCodeMappingRepository = Guard.IsNotNull(acquirerResponseCodeMappingRepository, nameof(acquirerResponseCodeMappingRepository));
             _paymentRepository = Guard.IsNotNull(paymentRepository, nameof(paymentRepository));
             _processors = Guard.IsNotNull(processors, nameof(processors));
+            _cryptor = Guard.IsNotNull(cryptor, nameof(cryptor));
             _mapper = Guard.IsNotNull(mapper, nameof(mapper));
         }
 
@@ -44,18 +46,19 @@ namespace Gateway.Core.Services
 
             var payment = await _paymentRepository.GetByIdAsync(paymentId);
 
-            // This should normally return a 404 Not Found exception as well for security purposes. Unauthorized used just for testing purposes.
-            if (payment.MerchantId != merchant.Id)
-            {
-                throw new UnauthorizedException($"Merchant is not authorised to retrieve this payment.");
-            }
-
             if (payment == null)
             {
                 throw new ObjectNotFoundException($"No payment with id '{ paymentId } was found.'");
             }
 
+            // This check should normally return a Not Found exception for security purposes. Unauthorized used for testing purposes only.
+            if (payment.MerchantId != merchant.Id)
+            {
+                throw new UnauthorizedException($"Merchant is not authorised to retrieve this payment.");
+            }
+
             var response = _mapper.Map<PaymentResponseModel>(payment);
+            response.Card.Number = _cryptor.Decrypt(response.Card.Number);
 
             return response;
         }
@@ -113,7 +116,7 @@ namespace Gateway.Core.Services
                 Status = Constants.PendingStatus,
                 Amount = request.Amount,
                 Currency = request.Currency,
-                CardNumber = request.Card.Number,
+                CardNumber = _cryptor.Encrypt(request.Card.Number),
                 ExpiryMonth = request.Card.ExpiryMonth,
                 ExpiryYear = request.Card.ExpiryYear,
                 CardholderName = request.Card.Name,

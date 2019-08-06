@@ -22,6 +22,7 @@
 - Document about separation of processors
 - FluentValidation
 - Swagger
+- Exception middleware
 
 # Assumptions
 - For the sake of this test, the routing process has been kept very straight-forward. Card scheme and currency are not taken into consideration when routing and all requests are sent to the simulator.  
