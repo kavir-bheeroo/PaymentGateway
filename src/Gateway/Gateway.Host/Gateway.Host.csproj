@@ -18,9 +18,11 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.7.12" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
     <PackageReference Include="Npgsql" Version="4.0.8" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Gateway.Common.Web\Gateway.Common.Web.csproj" />
     <ProjectReference Include="..\..\Common\Gateway.Common\Gateway.Common.csproj" />
     <ProjectReference Include="..\Gateway.Contracts.Public\Gateway.Contracts.Public.csproj" />
     <ProjectReference Include="..\Gateway.Contracts\Gateway.Contracts.csproj" />

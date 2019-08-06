@@ -4,10 +4,12 @@ using Gateway.Contracts.Interfaces;
 using Gateway.Contracts.Models;
 using Gateway.Contracts.Public.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using CustomResponse = Gateway.Common.Web.Models.WebResponse;
 
 namespace Gateway.Host.Controllers
 {
@@ -29,9 +31,9 @@ namespace Gateway.Host.Controllers
         /// Get a Payment By Id
         /// </summary>
         [HttpGet("{paymentId}")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(CustomResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(CustomResponse), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<PaymentResponse>> Get(Guid paymentId)
         {
             var merchant = _mapper.Map<MerchantModel>(User);
@@ -47,6 +49,8 @@ namespace Gateway.Host.Controllers
         /// <param name="request">The payment request details.</param>
         /// <returns>The payment response details.</returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(CustomResponse), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<PaymentResponse>> Post(PaymentRequest request)
         {
             var paymentRequest = _mapper.Map<PaymentRequestModel>(request);

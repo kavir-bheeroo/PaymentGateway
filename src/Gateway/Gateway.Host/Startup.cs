@@ -1,7 +1,9 @@
 ﻿using Autofac;
 using AutoMapper;
 using Dapper.FluentMap;
+using Gateway.Common.Web.Middlewares;
 using Gateway.Core;
+using Gateway.Core.Security;
 using Gateway.Data.Dapper;
 using Gateway.Data.Dapper.Mappings;
 using Gateway.Host.Authentication;
@@ -12,6 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Gateway.Host
 {
@@ -37,6 +40,7 @@ namespace Gateway.Host
             });
 
             services.Configure<DatabaseOptions>(Configuration.GetSection(DatabaseOptions.DefaultSectionName));
+            services.Configure<SecurityOptions>(Configuration.GetSection(SecurityOptions.DefaultSectionName));
 
             services.AddAuthentication(SecretKeyAuthenticationDefaults.AuthenticationScheme)
                 .AddSecretKey();
@@ -47,6 +51,11 @@ namespace Gateway.Host
                 typeof(Acquiring.BankSimulator.Mappers.MappingProfile));
 
             services.AddHttpClient();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Gateway", Version = "v1" });
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -66,6 +75,13 @@ namespace Gateway.Host
             }
 
             app.UseAuthentication();
+            app.UseMiddleware<ResponseMiddleware>();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gateway V1");
+            });
+
             app.UseMvc();
         }
     }

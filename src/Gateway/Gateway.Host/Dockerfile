@@ -5,8 +5,9 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
 WORKDIR /src
 COPY ["src/Gateway/Gateway.Host/Gateway.Host.csproj", "src/Gateway/Gateway.Host/"]
-COPY ["src/Gateway/Gateway.Data.Dapper/Gateway.Data.Dapper.csproj", "src/Gateway/Gateway.Data.Dapper/"]
+COPY ["src/Common/Gateway.Common.Web/Gateway.Common.Web.csproj", "src/Common/Gateway.Common.Web/"]
 COPY ["src/Common/Gateway.Common/Gateway.Common.csproj", "src/Common/Gateway.Common/"]
+COPY ["src/Gateway/Gateway.Data.Dapper/Gateway.Data.Dapper.csproj", "src/Gateway/Gateway.Data.Dapper/"]
 COPY ["src/Gateway/Gateway.Data.Contracts/Gateway.Data.Contracts.csproj", "src/Gateway/Gateway.Data.Contracts/"]
 COPY ["src/Gateway/Gateway.Contracts.Public/Gateway.Contracts.Public.csproj", "src/Gateway/Gateway.Contracts.Public/"]
 COPY ["src/Gateway/Gateway.Contracts/Gateway.Contracts.csproj", "src/Gateway/Gateway.Contracts/"]
