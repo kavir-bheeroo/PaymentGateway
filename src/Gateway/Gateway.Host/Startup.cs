@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
 using Dapper.FluentMap;
+using Gateway.Common.Web.Middlewares;
 using Gateway.Core;
 using Gateway.Core.Security;
 using Gateway.Data.Dapper;
@@ -68,6 +69,7 @@ namespace Gateway.Host
             }
 
             app.UseAuthentication();
+            app.UseMiddleware<ResponseMiddleware>();
             app.UseMvc();
         }
     }

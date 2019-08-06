@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Gateway.Common.Web\Gateway.Common.Web.csproj" />
     <ProjectReference Include="..\..\Common\Gateway.Common\Gateway.Common.csproj" />
     <ProjectReference Include="..\Gateway.Contracts.Public\Gateway.Contracts.Public.csproj" />
     <ProjectReference Include="..\Gateway.Contracts\Gateway.Contracts.csproj" />

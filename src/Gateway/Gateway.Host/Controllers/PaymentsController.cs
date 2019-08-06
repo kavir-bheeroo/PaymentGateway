@@ -47,6 +47,8 @@ namespace Gateway.Host.Controllers
         /// <param name="request">The payment request details.</param>
         /// <returns>The payment response details.</returns>
         [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<PaymentResponse>> Post(PaymentRequest request)
         {
             var paymentRequest = _mapper.Map<PaymentRequestModel>(request);
