@@ -7,6 +7,7 @@ using Gateway.Common;
 using Gateway.Common.Exceptions;
 using Gateway.Contracts.Interfaces;
 using Gateway.Contracts.Models;
+using Gateway.Core.Security;
 using Gateway.Data.Contracts.Entities;
 using Gateway.Data.Contracts.Interfaces;
 using System;
@@ -58,7 +59,7 @@ namespace Gateway.Core.Services
             }
 
             var response = _mapper.Map<PaymentResponseModel>(payment);
-            response.Card.Number = _cryptor.Decrypt(response.Card.Number);
+            response.Card.Number = MaskHelper.MaskCardNumber(_cryptor.Decrypt(response.Card.Number));
 
             return response;
         }
@@ -96,6 +97,7 @@ namespace Gateway.Core.Services
             var response = _mapper.Map<PaymentResponseModel>(processorResponse);
             response.ResponseCode = responseCodeMapping?.GatewayResponseCode ?? Constants.FailResponseCode;
             response.Status = response.ResponseCode.Equals(Constants.SuccessResponseCode) ? Constants.SuccessStatus : Constants.FailStatus;
+            response.Card.Number = MaskHelper.MaskCardNumber(response.Card.Number);
 
             // Map response details to the payment and update data store
             _mapper.Map(response, payment);
