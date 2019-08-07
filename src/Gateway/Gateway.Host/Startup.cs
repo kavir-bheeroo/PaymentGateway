@@ -58,6 +58,7 @@ namespace Gateway.Host
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMetrics();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)

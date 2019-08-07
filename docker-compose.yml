@@ -16,6 +16,7 @@ services:
     environment:
       - ASPNETCORE_URLS=http://+:8080
       - Database__GatewayDatabaseConnectionString=Host=gatewaydb;Username=postgres;Password=postgres;Database=gateway
+      - Security__CryptKey=MeSCuecGTisCpLZbzQ51GHcAnrITTS4B
     ports:
       - "5000:8080"
     depends_on:

@@ -7,7 +7,7 @@
 - Created resource link available in create payment response.
 - Card numbers are encrypted using AES and masked when returned by the API.
 
-# Technologies used
+# Technologies and packages used
 - ASP.NET Core 2.2
 - PostgreSQL
 - Dapper
@@ -16,6 +16,7 @@
 - AutoMapper
 - Autofac
 - Swagger
+- App Metrics
 
 # To-do
 - Time request-response
