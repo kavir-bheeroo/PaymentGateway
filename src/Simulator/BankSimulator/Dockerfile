@@ -5,6 +5,8 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
 WORKDIR /src
 COPY ["src/Simulator/BankSimulator/BankSimulator.csproj", "src/Simulator/BankSimulator/"]
+COPY ["src/Common/Gateway.Common.Logging.Serilog/Gateway.Common.Logging.Serilog.csproj", "src/Common/Gateway.Common.Logging.Serilog/"]
+COPY ["src/Common/Gateway.Common/Gateway.Common.csproj", "src/Common/Gateway.Common/"]
 RUN dotnet restore "src/Simulator/BankSimulator/BankSimulator.csproj"
 COPY . .
 WORKDIR "/src/src/Simulator/BankSimulator"

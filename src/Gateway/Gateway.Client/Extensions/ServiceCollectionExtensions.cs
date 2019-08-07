@@ -12,6 +12,7 @@ namespace Gateway.Client.Extensions
     {
         public static void AddGatewayHttpClient(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddCorrelationId();
             services.Configure<CorrelationIdOptions>(configuration.GetSection("CorrelationId"));
 
             services.AddTransient<ValidateAuthorizationHeaderHandler>();

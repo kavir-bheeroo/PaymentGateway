@@ -95,6 +95,7 @@ namespace Gateway.Core.Services
             var responseCodeMapping = await _acquirerResponseCodeMappingRepository.GetByAcquirerResponseCodeAsync(processorResponse.AcquirerResponseCode);
 
             var response = _mapper.Map<PaymentResponseModel>(processorResponse);
+            response.TrackId = request.TrackId;
             response.ResponseCode = responseCodeMapping?.GatewayResponseCode ?? Constants.FailResponseCode;
             response.Status = response.ResponseCode.Equals(Constants.SuccessResponseCode) ? Constants.SuccessStatus : Constants.FailStatus;
             response.Card.Number = MaskHelper.MaskCardNumber(response.Card.Number);
@@ -115,6 +116,7 @@ namespace Gateway.Core.Services
                 MerchantName = merchantAcquirer.MerchantName,
                 AcquirerId = merchantAcquirer.AcquirerId,
                 AcquirerName = merchantAcquirer.AcquirerName,
+                TrackId = request.TrackId,
                 Status = Constants.PendingStatus,
                 Amount = request.Amount,
                 Currency = request.Currency,

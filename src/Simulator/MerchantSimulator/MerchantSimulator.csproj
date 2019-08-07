@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CorrelationId" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.7.12" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
@@ -16,6 +15,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Gateway.Common.Logging.Serilog\Gateway.Common.Logging.Serilog.csproj" />
+    <ProjectReference Include="..\..\Common\Gateway.Common.Web\Gateway.Common.Web.csproj" />
+    <ProjectReference Include="..\..\Gateway\Gateway.Client\Gateway.Client.csproj" />
+    <ProjectReference Include="..\..\Gateway\Gateway.Contracts.Public\Gateway.Contracts.Public.csproj" />
   </ItemGroup>
 
 </Project>

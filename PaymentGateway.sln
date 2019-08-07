@@ -48,6 +48,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gateway.Common.Logging.Seri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.Client", "src\Gateway\Gateway.Client\Gateway.Client.csproj", "{67EF3DC2-C1CD-4239-A754-2D2C2B1233B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MerchantSimulator", "src\Simulator\MerchantSimulator\MerchantSimulator.csproj", "{D66A1D63-4BCB-4FAA-A988-A622B8B46252}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,6 +116,10 @@ Global
 		{67EF3DC2-C1CD-4239-A754-2D2C2B1233B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67EF3DC2-C1CD-4239-A754-2D2C2B1233B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67EF3DC2-C1CD-4239-A754-2D2C2B1233B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D66A1D63-4BCB-4FAA-A988-A622B8B46252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D66A1D63-4BCB-4FAA-A988-A622B8B46252}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D66A1D63-4BCB-4FAA-A988-A622B8B46252}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D66A1D63-4BCB-4FAA-A988-A622B8B46252}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -136,6 +142,7 @@ Global
 		{E4459BED-B4EE-4BA9-B054-FA8527FDF919} = {823869D9-F639-4636-B72F-DB5E138528B8}
 		{0CC66B56-AA18-4350-8A5B-5C37802D66F4} = {823869D9-F639-4636-B72F-DB5E138528B8}
 		{67EF3DC2-C1CD-4239-A754-2D2C2B1233B2} = {FD7C5FA4-20D8-4586-B931-96DA5C262EBF}
+		{D66A1D63-4BCB-4FAA-A988-A622B8B46252} = {972B0A68-9600-40BA-916D-AAE319D076D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DAEE3D30-8D54-4E67-AB1E-DD36477343FC}

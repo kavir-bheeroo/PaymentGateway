@@ -7,7 +7,7 @@ namespace Gateway.Client.Interfaces
 {
     public interface IGatewayHttpClient
     {
-        [Get("/api/payments")]
+        [Get("/api/payments/{paymentId}")]
         Task<PaymentResponse> GetPaymentAsync(Guid paymentId, [Header("Authorization")] string authorization);
 
         [Post("/api/payments")]

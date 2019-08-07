@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace BankSimulator
+namespace MerchantSimulator
 {
     public class Program
     {
@@ -12,7 +12,7 @@ namespace BankSimulator
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                //.UseUrls("http://localhost:5001")
+            //.UseUrls("http://locahost:7001")
                 .UseStartup<Startup>();
     }
 }

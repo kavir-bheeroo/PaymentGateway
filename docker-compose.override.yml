@@ -5,7 +5,7 @@ services:
     ports:
       - "5432:5432"
 
-  gateway.host:
+  gatewayhost:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - Serilog__MinimumLevel__Default=Information
@@ -13,6 +13,13 @@ services:
       - Serilog__MinimumLevel__Override__System=Information
 
   banksimulator:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Serilog__MinimumLevel__Default=Information
+      - Serilog__MinimumLevel__Override__Microsoft=Information
+      - Serilog__MinimumLevel__Override__System=Information
+
+  merchantsimulator:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - Serilog__MinimumLevel__Default=Information
