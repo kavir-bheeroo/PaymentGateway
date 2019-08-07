@@ -17,6 +17,9 @@
 	acquirer_status VARCHAR(50),
 	acquirer_response_code VARCHAR(50),
 	payment_time TIMESTAMPTZ NOT NULL,
+	correlation_id VARCHAR NOT NULL,
 
 	CONSTRAINT payments_pk PRIMARY KEY (id)
 );
+
+CREATE INDEX payments_request_id_index ON payments (correlation_id);

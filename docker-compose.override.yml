@@ -8,6 +8,9 @@ services:
   gateway.host:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - Serilog__MinimumLevel__Default=Information
+      - Serilog__MinimumLevel__Override__Microsoft=Information
+      - Serilog__MinimumLevel__Override__System=Information
 
   banksimulator:
     environment:

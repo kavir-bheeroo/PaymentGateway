@@ -1,5 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CorrelationId;
+using Gateway.Common.Logging.Serilog.Enrichers;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
+using Serilog;
 using System;
 
 namespace Gateway.Host.Extensions
@@ -16,6 +20,20 @@ namespace Gateway.Host.Extensions
             };
 
             evolve.Migrate();
+        }
+
+        public static void AddLogger(this IServiceCollection services, IConfiguration configuration)
+        {
+            var serviceProvider = services.BuildServiceProvider();
+            var correlationContextAccessor = serviceProvider.GetRequiredService<ICorrelationContextAccessor>();
+            var correlationIdOptions = configuration.GetSection("CorrelationId").Get<CorrelationIdOptions>();
+
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .Enrich.FromLogContext()
+                .Enrich.With(new CorrelationIdEnricher(correlationContextAccessor, correlationIdOptions))
+                .WriteTo.Seq(configuration["Seq:ServerUrl"])
+                .CreateLogger();
         }
     }
 }

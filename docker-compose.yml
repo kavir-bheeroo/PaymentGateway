@@ -17,11 +17,13 @@ services:
       - ASPNETCORE_URLS=http://+:8080
       - Database__GatewayDatabaseConnectionString=Host=gatewaydb;Username=postgres;Password=postgres;Database=gateway
       - Security__CryptKey=MeSCuecGTisCpLZbzQ51GHcAnrITTS4B
+      - Seq__ServerUrl=http://seq
     ports:
       - "5000:8080"
     depends_on:
       - gatewaydb
       - banksimulator
+      - seq
     restart: on-failure
 
   banksimulator:
@@ -34,3 +36,12 @@ services:
     ports:
       - "5001:8080"
     restart: on-failure
+
+  seq:
+    image: datalust/seq:latest
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - "5002:80"
+      - "5314:5314"
+    restart: unless-stopped
