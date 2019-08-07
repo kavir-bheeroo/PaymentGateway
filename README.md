@@ -6,8 +6,9 @@
 - Payment details are stored in the database and can be queried.
 - Created resource link available in create payment response.
 - Card numbers are encrypted using AES and masked when returned by the API.
+- CorrelationId is propagated in requests and stored in Seq and PostgreSQL. 
 
-# Technologies used
+# Technologies and packages used
 - ASP.NET Core 2.2
 - PostgreSQL
 - Dapper
@@ -16,6 +17,10 @@
 - AutoMapper
 - Autofac
 - Swagger
+- App Metrics
+- CorrelationId
+- Serilog
+- Seq
 
 # To-do
 - Time request-response

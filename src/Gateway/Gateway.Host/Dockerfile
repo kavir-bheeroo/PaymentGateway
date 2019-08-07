@@ -9,6 +9,7 @@ COPY ["src/Common/Gateway.Common.Web/Gateway.Common.Web.csproj", "src/Common/Gat
 COPY ["src/Common/Gateway.Common/Gateway.Common.csproj", "src/Common/Gateway.Common/"]
 COPY ["src/Gateway/Gateway.Data.Dapper/Gateway.Data.Dapper.csproj", "src/Gateway/Gateway.Data.Dapper/"]
 COPY ["src/Gateway/Gateway.Data.Contracts/Gateway.Data.Contracts.csproj", "src/Gateway/Gateway.Data.Contracts/"]
+COPY ["src/Common/Gateway.Common.Logging.Serilog/Gateway.Common.Logging.Serilog.csproj", "src/Common/Gateway.Common.Logging.Serilog/"]
 COPY ["src/Gateway/Gateway.Contracts.Public/Gateway.Contracts.Public.csproj", "src/Gateway/Gateway.Contracts.Public/"]
 COPY ["src/Gateway/Gateway.Contracts/Gateway.Contracts.csproj", "src/Gateway/Gateway.Contracts/"]
 COPY ["src/Gateway/Gateway.Data.Migrations/Gateway.Data.Migrations.csproj", "src/Gateway/Gateway.Data.Migrations/"]

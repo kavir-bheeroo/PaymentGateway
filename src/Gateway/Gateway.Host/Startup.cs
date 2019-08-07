@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using AutoMapper;
+using CorrelationId;
 using Dapper.FluentMap;
 using Gateway.Common.Web.Middlewares;
 using Gateway.Core;
@@ -14,7 +15,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
+using ILogger = Serilog.ILogger;
 
 namespace Gateway.Host
 {
@@ -26,6 +30,7 @@ namespace Gateway.Host
         }
 
         public IConfiguration Configuration { get; }
+        public ILogger Logger { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -41,6 +46,7 @@ namespace Gateway.Host
 
             services.Configure<DatabaseOptions>(Configuration.GetSection(DatabaseOptions.DefaultSectionName));
             services.Configure<SecurityOptions>(Configuration.GetSection(SecurityOptions.DefaultSectionName));
+            services.Configure<CorrelationIdOptions>(Configuration.GetSection("CorrelationId"));
 
             services.AddAuthentication(SecretKeyAuthenticationDefaults.AuthenticationScheme)
                 .AddSecretKey();
@@ -57,7 +63,11 @@ namespace Gateway.Host
                 c.SwaggerDoc("v1", new Info { Title = "Gateway", Version = "v1" });
             });
 
+            services.AddCorrelationId();
+            services.AddLogger(Configuration);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMetrics();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -67,8 +77,13 @@ namespace Gateway.Host
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            var correlationIdOptions = Configuration.GetSection("CorrelationId").Get<CorrelationIdOptions>();
+            app.UseCorrelationId(correlationIdOptions);
+
+            loggerFactory.AddSerilog(Logger);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

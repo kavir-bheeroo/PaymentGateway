@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using CorrelationId;
+using Dapper;
 using Gateway.Common;
 using Gateway.Common.Exceptions;
 using Gateway.Data.Contracts.Entities;
@@ -13,10 +14,12 @@ namespace Gateway.Data.Dapper.Repositories
     public class PaymentRepository : IPaymentRepository
     {
         private readonly DatabaseOptions _databaseOptions;
+        private readonly ICorrelationContextAccessor _correlationContextAccessor;
 
-        public PaymentRepository(IOptions<DatabaseOptions> databaseOptions)
+        public PaymentRepository(IOptions<DatabaseOptions> databaseOptions, ICorrelationContextAccessor correlationContextAccessor)
         {
             _databaseOptions = Guard.IsNotNull(databaseOptions, nameof(databaseOptions)).Value;
+            _correlationContextAccessor = Guard.IsNotNull(correlationContextAccessor, nameof(correlationContextAccessor));
         }
 
         public async Task<PaymentEntity> GetByIdAsync(Guid id)
@@ -77,7 +80,8 @@ namespace Gateway.Data.Dapper.Repositories
                         acquirer_payment_id,
                         acquirer_status,
                         acquirer_response_code,
-                        payment_time
+                        payment_time,
+                        correlation_id
                 )
                 VALUES
                 (
@@ -97,7 +101,8 @@ namespace Gateway.Data.Dapper.Repositories
                         @AcquirerPaymentId,
                         @AcquirerStatus,
                         @AcquirerResponseCode,
-                        @PaymentTime
+                        @PaymentTime,
+                        @RequestId
                 )
             ";
 
@@ -119,7 +124,8 @@ namespace Gateway.Data.Dapper.Repositories
                 payment.AcquirerPaymentId,
                 payment.AcquirerStatus,
                 payment.AcquirerResponseCode,
-                payment.PaymentTime
+                payment.PaymentTime,
+                RequestId = _correlationContextAccessor?.CorrelationContext?.CorrelationId
             };
 
             using (var connection = new NpgsqlConnection(_databaseOptions.GatewayDatabaseConnectionString))
