@@ -6,7 +6,8 @@
 - Payment details are stored in the database and can be queried.
 - Created resource link available in create payment response.
 - Card numbers are encrypted using AES and masked when returned by the API.
-- CorrelationId is propagated in requests and stored in Seq and PostgreSQL. 
+- IHttpClientFactory and Refit used to create an API client library - https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-2.2
+- CorrelationId flows from MerchantSimulator to Gateway to BankSimulator and is logged on Seq and stored in PostgreSQL.
 
 # Technologies and packages used
 - ASP.NET Core 2.2
@@ -21,6 +22,8 @@
 - CorrelationId
 - Serilog
 - Seq
+- IHttpClientFactory
+- Refit
 
 # To-do
 - Time request-response
