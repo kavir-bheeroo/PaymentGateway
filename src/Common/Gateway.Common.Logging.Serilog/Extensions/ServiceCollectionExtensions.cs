@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 
-namespace BankSimulator.Extensions
+namespace Gateway.Common.Logging.Serilog.Extensions
 {
     public static class ServiceCollectionExtensions
     {

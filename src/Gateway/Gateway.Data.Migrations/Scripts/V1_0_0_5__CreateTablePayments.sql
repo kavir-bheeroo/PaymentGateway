@@ -5,6 +5,7 @@
 	merchant_name VARCHAR(100) NOT NULL,
 	acquirer_id BIGINT REFERENCES acquirers(id),
 	acquirer_name VARCHAR(100) NOT NULL,
+	track_id VARCHAR(100) NOT NULL,
 	status VARCHAR(20) NOT NULL,
 	response_code VARCHAR(5),
 	amount INT NOT NULL,

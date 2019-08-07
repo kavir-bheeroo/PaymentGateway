@@ -9,6 +9,7 @@ namespace Gateway.Data.Contracts.Entities
         public string MerchantName { get; set; }
         public int AcquirerId { get; set; }
         public string AcquirerName { get; set; }
+        public string TrackId { get; set; }
         public string Status { get; set; }
         public string ResponseCode { get; set; }
         public int Amount { get; set; }

@@ -4,6 +4,7 @@
     {
         public string AcquirerPaymentId { get; set; }
         public string PaymentId { get; set; }
+        public string TrackId { get; set; }
         public int Amount { get; set; }
         public string Currency { get; set; }
         public CardResponse Card { get; set; }
