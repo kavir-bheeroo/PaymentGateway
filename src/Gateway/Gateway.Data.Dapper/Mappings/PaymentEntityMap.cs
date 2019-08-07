@@ -12,6 +12,7 @@ namespace Gateway.Data.Dapper.Mappings
             Map(m => m.MerchantName).ToColumn("merchant_name");
             Map(m => m.AcquirerId).ToColumn("acquirer_id");
             Map(m => m.AcquirerName).ToColumn("acquirer_name");
+            Map(m => m.TrackId).ToColumn("track_id");
             Map(m => m.Status).ToColumn("status");
             Map(m => m.ResponseCode).ToColumn("response_code");
             Map(m => m.Amount).ToColumn("amount");
