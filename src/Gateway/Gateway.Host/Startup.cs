@@ -2,7 +2,6 @@
 using AutoMapper;
 using CorrelationId;
 using Dapper.FluentMap;
-using Gateway.Common.Logging.Serilog.Enrichers;
 using Gateway.Common.Web.Middlewares;
 using Gateway.Core;
 using Gateway.Core.Security;
@@ -17,7 +16,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
 using ILogger = Serilog.ILogger;
@@ -48,6 +46,7 @@ namespace Gateway.Host
 
             services.Configure<DatabaseOptions>(Configuration.GetSection(DatabaseOptions.DefaultSectionName));
             services.Configure<SecurityOptions>(Configuration.GetSection(SecurityOptions.DefaultSectionName));
+            services.Configure<CorrelationIdOptions>(Configuration.GetSection("CorrelationId"));
 
             services.AddAuthentication(SecretKeyAuthenticationDefaults.AuthenticationScheme)
                 .AddSecretKey();

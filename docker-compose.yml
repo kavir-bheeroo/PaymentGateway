@@ -33,6 +33,7 @@ services:
       dockerfile: src/Simulator/BankSimulator/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:8080
+      - Seq__ServerUrl=http://seq
     ports:
       - "5001:8080"
     restart: on-failure
