@@ -11,7 +11,7 @@ using Gateway.Core.Security;
 using Gateway.Data.Contracts.Entities;
 using Gateway.Data.Contracts.Interfaces;
 using System;
-using System.Threading.Tasks;
+using System.Threading.Tasks;using FluentValidation;
 
 namespace Gateway.Core.Services
 {
@@ -22,7 +22,10 @@ namespace Gateway.Core.Services
         private readonly IPaymentRepository _paymentRepository;
         private readonly IIndex<ProcessorList, IProcessor> _processors;
         private readonly ICryptor _cryptor;
+        private readonly IValidator<PaymentRequestModel> _paymentRequestModelValidator;
+        private readonly IValidator<MerchantModel> _merchantModelValidator;
         private readonly IMapper _mapper;
+
         private IProcessor _processor;
 
         public PaymentService(
@@ -31,6 +34,8 @@ namespace Gateway.Core.Services
             IPaymentRepository paymentRepository,
             IIndex<ProcessorList, IProcessor> processors,
             ICryptor cryptor,
+            IValidator<PaymentRequestModel> paymentRequestModelValidator,
+            IValidator<MerchantModel> merchantModelValidator,
             IMapper mapper)
         {
             _merchantAcquirerRepository = Guard.IsNotNull(merchantAcquirerRepository, nameof(merchantAcquirerRepository));
@@ -38,12 +43,15 @@ namespace Gateway.Core.Services
             _paymentRepository = Guard.IsNotNull(paymentRepository, nameof(paymentRepository));
             _processors = Guard.IsNotNull(processors, nameof(processors));
             _cryptor = Guard.IsNotNull(cryptor, nameof(cryptor));
+            _paymentRequestModelValidator = Guard.IsNotNull(paymentRequestModelValidator, nameof(paymentRequestModelValidator));
+            _merchantModelValidator = Guard.IsNotNull(merchantModelValidator, nameof(merchantModelValidator));
             _mapper = Guard.IsNotNull(mapper, nameof(mapper));
         }
 
         public async Task<PaymentResponseModel> GetByIdAsync(Guid paymentId, MerchantModel merchant)
         {
             Guard.IsNotNull(paymentId, nameof(paymentId));
+            _merchantModelValidator.ValidateAndThrow(merchant);
 
             var payment = await _paymentRepository.GetByIdAsync(paymentId);
 
@@ -66,8 +74,8 @@ namespace Gateway.Core.Services
 
         public async Task<PaymentResponseModel> ProcessAsync(PaymentRequestModel request, MerchantModel merchant)
         {
-            Guard.IsNotNull(request, nameof(request));
-            Guard.IsNotNull(merchant, nameof(merchant));
+            _paymentRequestModelValidator.ValidateAndThrow(request);
+            _merchantModelValidator.ValidateAndThrow(merchant);
 
             var merchantAcquirer = await _merchantAcquirerRepository.GetByMerchantIdAsync(merchant.Id);
 
@@ -76,6 +84,7 @@ namespace Gateway.Core.Services
                 throw new GatewayException($"No acquirer setup for merchant '{ merchant.Name }'.");
             }
 
+            // Get the appropriate processor from the AcquirerName.
             var enumAsString = (ProcessorList) Enum.Parse(typeof(ProcessorList), merchantAcquirer.AcquirerName);
             _processor = _processors[enumAsString];
 

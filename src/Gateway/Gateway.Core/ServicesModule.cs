@@ -1,10 +1,13 @@
 ﻿using Autofac;
+using FluentValidation;
 using Gateway.Acquiring.BankSimulator;
 using Gateway.Acquiring.Contracts;
 using Gateway.Acquiring.Contracts.Interfaces;
 using Gateway.Contracts.Interfaces;
+using Gateway.Contracts.Models;
 using Gateway.Core.Security;
 using Gateway.Core.Services;
+using Gateway.Core.Validators;
 
 namespace Gateway.Core
 {
@@ -25,6 +28,21 @@ namespace Gateway.Core
             builder
                 .RegisterType<AesCryptor>()
                 .As<ICryptor>()
+                .InstancePerLifetimeScope();
+
+            builder
+                .RegisterType<PaymentRequestModelValidator>()
+                .As<IValidator<PaymentRequestModel>>()
+                .InstancePerLifetimeScope();
+
+            builder
+                .RegisterType<CardRequestModelValidator>()
+                .As<IValidator<CardRequestModel>>()
+                .InstancePerLifetimeScope();
+
+            builder
+                .RegisterType<MerchantModelValidator>()
+                .As<IValidator<MerchantModel>>()
                 .InstancePerLifetimeScope();
 
             builder

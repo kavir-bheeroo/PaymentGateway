@@ -2,6 +2,7 @@
 using AutoMapper;
 using CorrelationId;
 using Dapper.FluentMap;
+using FluentValidation.AspNetCore;
 using Gateway.Common.Web.Middlewares;
 using Gateway.Core;
 using Gateway.Core.Security;
@@ -66,7 +67,10 @@ namespace Gateway.Host
             services.AddCorrelationId();
             services.AddLogger(Configuration);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                .AddFluentValidation(cfg => cfg.RegisterValidatorsFromAssemblyContaining<Startup>())
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
             services.AddMetrics();
         }
 
@@ -90,7 +94,10 @@ namespace Gateway.Host
             }
 
             app.UseAuthentication();
+
             app.UseMiddleware<ResponseMiddleware>();
+            app.UseMiddleware<ValidationMiddleware>();
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

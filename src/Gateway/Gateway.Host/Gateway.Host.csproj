@@ -13,8 +13,10 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
     <PackageReference Include="CorrelationId" Version="2.1.0" />
+    <PackageReference Include="CreditCardValidator" Version="1.4.6" />
     <PackageReference Include="Dapper.FluentMap" Version="1.8.0" />
     <PackageReference Include="Evolve" Version="2.2.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.7.12" />
     <PackageReference Include="Npgsql" Version="4.0.8" />
@@ -34,10 +36,6 @@
     <ProjectReference Include="..\Gateway.Data.Contracts\Gateway.Data.Contracts.csproj" />
     <ProjectReference Include="..\Gateway.Data.Dapper\Gateway.Data.Dapper.csproj" />
     <ProjectReference Include="..\Gateway.Data.Migrations\Gateway.Data.Migrations.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Validators\" />
   </ItemGroup>
 
 </Project>
