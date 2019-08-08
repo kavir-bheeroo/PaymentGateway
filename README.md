@@ -121,3 +121,5 @@
 - Break the main gateway into smaller services that fits better in a microservices pattern. They can then be developed, maintained and deployed separately.
 - Generate asynchronous events to keep all services in sync to changes in the entire system - Use technologies like RabbitMQ, Kafka or EventStore for this.
 - Communication between microservices can be done by asynchronous events, HTTP or gRPC.
+- Add more unit tests to test all the logic.
+- Add integration tests to test the whole application flow.
