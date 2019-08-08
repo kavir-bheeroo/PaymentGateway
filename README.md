@@ -23,7 +23,7 @@
 - Validation at API and Service layers are done using FluentValidation.
 - Credit Card validation is done using CreditCardValidator library - https://github.com/gustavofrizzo/CreditCardValidator
 - App metrics have been included and available at 'http://localhost:5000/metrics'.
-- All logs go to Seq via Serilog.
+- All logs go to Seq via Serilog. Seq can be accessed at 'http://localhost:5003'.
 
 ### BankSimulator
 - The BankSimulator API mocks an acquirer and sends a successful or failed response based on the amount being passed (1000 for failed, the rest will be successful).
@@ -55,6 +55,7 @@
 - IHttpClientFactory
 - Refit
 - FluentValidation
+- xUnit
 
 ## How-to
 - The Gateway has two main functionality that it provides:
