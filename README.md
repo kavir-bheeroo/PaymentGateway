@@ -66,7 +66,7 @@
 ### Create a payment
 1. The entire system has been containerised and runs on Docker. Bring everything up using `docker-compose up`. Wait some time until all containers are up and running.
 2. Select the Create Payment request and hit the Send button.
-3. A response should be back with the payment details.
+3. A successful response should be back with the payment details.
 ```
 {
     "acquirerPaymentId": "6d1ab701-96ef-4dfc-869a-0383892c68e5",
@@ -86,6 +86,7 @@
     "acquirerResponseCode": "200"
 }
 ```
+4. A failed response can also be obtained by sending 1000 as the amount in the request.
 
 ### Retrieve details of a past payment
 1. Copy the paymentId GUID and select the Get Payment request.
