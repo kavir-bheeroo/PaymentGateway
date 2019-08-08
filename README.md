@@ -90,7 +90,7 @@
 ### Retrieve details of a past payment
 1. Copy the paymentId GUID and select the Get Payment request.
 2. Overwrite the paymentId in the URL and hit Send.
-3 The same response as the previous one should be obtained.
+3. The same response as the previous one should be obtained.
 
 ### Notes
 - The Postman collection also contains two more requests that can be used to hit the MerchantSimulator API.
