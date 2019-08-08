@@ -56,7 +56,8 @@ namespace Gateway.Host.Authentication
             var claims = new[]
             {
                 new Claim(Common.Extensions.ClaimTypes.MerchantId, merchant.Id.ToString()),
-                new Claim(Common.Extensions.ClaimTypes.MerchantName, merchant.Name.ToString())
+                new Claim(Common.Extensions.ClaimTypes.MerchantName, merchant.Name),
+                new Claim(Common.Extensions.ClaimTypes.SecretKey, merchant.SecretKey)
             };
 
             var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, AuthenticationSchemeName));
