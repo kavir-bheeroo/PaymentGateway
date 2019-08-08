@@ -8,6 +8,8 @@
 - Card numbers are encrypted using AES and masked when returned by the API.
 - IHttpClientFactory and Refit used to create an API client library - https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-2.2
 - CorrelationId flows from MerchantSimulator to Gateway to BankSimulator and is logged on Seq and stored in PostgreSQL.
+- Credit Card validation done using CreditCardValidator library - https://github.com/gustavofrizzo/CreditCardValidator
+- Validation at API and Service layers using FluentValidation.
 
 # Technologies and packages used
 - ASP.NET Core 2.2
@@ -24,12 +26,12 @@
 - Seq
 - IHttpClientFactory
 - Refit
+- FluentValidation
 
 # To-do
 - Time request-response
 - Benchmarking and performance tuning
 - Document about separation of processors
-- FluentValidation
 - Add health checks
 
 # Assumptions
