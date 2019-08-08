@@ -97,7 +97,7 @@
 - Notice the Authorization key in both request headers. This is the Merchant secret key and is found in the Merchants table in the database.
 - It is the key used to identify the merchant. If an invalid key, a 401 response will be obtained.
 - The Postman collection also contains two more requests that can be used to hit the MerchantSimulator API.
-- Authenticated in the MerchantSimulator is handled by the API client library.
+- Authentication in the MerchantSimulator is handled by the API client library.
 
 ## Assumptions
 - For the sake of this test, the routing process has been kept very straight-forward. Card scheme and currency are not taken into consideration when routing and all requests are sent to the BankSimulator.
