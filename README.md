@@ -1,9 +1,9 @@
 # Payment Gateway
 ## Components
 - This payment gateway has three main components:
-* MerchantSimulator
-* Gateway
-* BankSimulator
+	* MerchantSimulator
+	* Gateway
+	* BankSimulator
 
 ### MerchantSimulator
 - This API mocks a merchant and has been created just to test the API client library built using IHttpClientFactory and Refit - https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-2.2
@@ -32,12 +32,12 @@
 ## Database design
 - The data store used is PostgreSQL and is created upon launch of the docker containers using migration scripts and Evolve - https://github.com/lecaillon/Evolve.
 - Dapper is used as ORM to communicate with the DB and is setup in a Repository pattern to promote de-coupling.
-- The database has five tables:
-* Merchants - stores all merchant details along with the secret key to use in API authentication.
-* Acquirers - stores acquirer details, mainly the URL of the acquirer API.
-* MerchantAcquirers - links merchants to acquirers.
-* AcquirerResponseCodeMappings - maps response code details from the acquirer to that of the gateway.
-* Payments - stores all the payment details.
+- The database has the following tables:
+	* Merchants - stores all merchant details along with the secret key to use in API authentication.
+	* Acquirers - stores acquirer details, mainly the URL of the acquirer API.
+	* MerchantAcquirers - links merchants to acquirers.
+	* AcquirerResponseCodeMappings - maps response code details from the acquirer to that of the gateway.
+	* Payments - stores all the payment details.
 
 ## Technologies and packages used
 - ASP.NET Core 2.2
